@@ -7,8 +7,6 @@ import configureStore from "./redux/store";
 
 import Layout from "./components/layouts/layout.react";
 
-import "./styles/helpers.scss";
-
 const initialState = {};
 const reduxStore = configureStore( initialState );
 window.redixStore = reduxStore;
