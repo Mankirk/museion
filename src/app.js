@@ -9,7 +9,8 @@ import Layout from "./components/layouts/layout.react";
 
 const initialState = {};
 const reduxStore = configureStore( initialState );
-window.redixStore = reduxStore;
+window.reduxStore = reduxStore;
+window.userLang = "en";
 
 const app = document.getElementById( "app" );
 

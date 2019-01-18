@@ -19,9 +19,20 @@ const widthReducer = ( state = 0, action ) => {
     }
 };
 
+const languageReducer = ( state = "en", action ) => {
+    switch ( action.type ) {
+        case types.SET_LANGUAGE:
+            window.userLang = action.payload;
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 const applicationReducer = combineReducers( {
     screenHeight: heightReducer,
     screenWidth: widthReducer,
+    language: languageReducer,
 } );
 
 export default applicationReducer;

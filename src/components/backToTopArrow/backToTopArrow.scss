@@ -1,0 +1,27 @@
+@import "../../styles/helpers.scss";
+
+.back-to-top::before {
+    content: "\2605";
+    font-size: 40px;
+    margin: 0px;
+}
+
+.back-to-top {
+    // border: solid;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    opacity: 0.8;
+    color: $primary;
+
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+    outline: none;
+    box-shadow: 5px 5px 5px $font-color;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+}

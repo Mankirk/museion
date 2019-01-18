@@ -6,7 +6,9 @@ import { applicationOperations } from "../../redux/ducks/application";
 
 import Header from "../headers/header.react";
 import Footer from "../footers/footer.react";
+import BackToTopArrow from "../backToTopArrow/backToTopArrow.react";
 
+import "./normalize.scss";
 import "./layout.scss";
 
 class Layout extends Component {
@@ -22,11 +24,22 @@ class Layout extends Component {
     }
 
     render() {
+        const placeholder = [];
+
+        // for ( let i = 0; i <= 200; i++ ) {
+        //     placeholder.push( <p>
+        //             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, ullam rerum
+        //             hic vero nisi modi obcaecati itaque explicabo dicta iure, laborum adipisci quo
+        //             aliquid ipsam voluptate, quibusdam nemo cum accusantium.
+        //     </p> );
+        // }
+
         return (
             <div className="app-root">
                 <Header />
-                <p>Content Dude</p>
+                <div className="main-content">{placeholder}</div>
                 <Footer />
+                <BackToTopArrow />
             </div>
         );
     }
