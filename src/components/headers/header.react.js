@@ -1,71 +1,34 @@
 import React from "react";
-import { connect } from "react-redux";
-
-import { applicationOperations } from "../../redux/ducks/application";
 
 import { Dictionary } from "../../helpers";
 
 import "./header.scss";
 
-const categoryMap = [
-    {
-        title: "Novelties",
-        subcategories: [
-            {
-                title: "Subcategory1Subcategory1Subcategory1Subcategory1Subcategory1",
-                sections: [
-                    "Elem1Elem1Elem1Elem1",
-                    "Elem2Elem2Elem2Elem2Elem2Elem2Elem2",
-                    "Elem3",
-                    "Elem4",
-                    "Elem5",
-                ],
-            },
-            { title: "Subcategory2", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory3", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory4", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory5", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-        ],
-    },
-    { title: "Themes" },
-    {
-        title: "Magnets",
-        subcategories: [
-            { title: "Subcategory1", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory2", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory3", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory4", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory5", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-        ],
-    },
-    { title: "Papeterie" },
-    { title: "Jewelry" },
-    { title: "Replicas" },
-    { title: "Nice&Usefull" },
-    { title: "Sale" },
-];
-
-const Header = ( { setLanguage } ) => {
-    console.log();
-
+const HeaderDesktop = ( { setLanguage, scrolledPastTop, categoryMap } ) => {
+    const shadowClass = scrolledPastTop ? "shadow" : "";
     const categories = buildCategories( categoryMap );
-
     return (
-        <div className="header">
-            <div className="top-register">
-                <img src="images/main-logo.png" alt="" />
-                <h2>{Dictionary[ window.userLang ].header.contactInfo}</h2>
-                <div className="lang-choice">
-                    <img src="images/uk-flag-icon.png" alt="" onClick={ () => setLanguage( "en" ) } />
-                    <img
-                        src="images/romania-flag-icon.png"
-                        alt=""
-                        onClick={ () => setLanguage( "ro" ) }
-                    />
+        <div className={ `header ${ shadowClass }` }>
+            <div className="header-container">
+                <div className="top-register">
+                    <img className="header-logo" src="images/main-logo.png" alt="" />
+                    <h2>{Dictionary[ window.userLang ].header.contactInfo}</h2>
+                    <div className="lang-choice">
+                        <img
+                            src="images/uk-flag-icon.png"
+                            alt=""
+                            onClick={ () => setLanguage( "en" ) }
+                        />
+                        <img
+                            src="images/romania-flag-icon.png"
+                            alt=""
+                            onClick={ () => setLanguage( "ro" ) }
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="bottom-register">
-                <ul className="categories">{categories}</ul>
+                <div className="bottom-register">
+                    <ul className="categories">{categories}</ul>
+                </div>
             </div>
         </div>
     );
@@ -110,11 +73,4 @@ function buildSections( sections ) {
     ) );
 }
 
-const mapDispatchToProps = {
-    setLanguage: applicationOperations.setLanguage,
-};
-
-export default connect(
-    null,
-    mapDispatchToProps
-)( Header );
+export default HeaderDesktop;
