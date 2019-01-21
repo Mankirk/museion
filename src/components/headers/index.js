@@ -9,6 +9,7 @@ import HeaderDesktop from "./headerMobile.react";
 const categoryMap = [
     {
         title: "Novelties",
+        key: "abba",
         subcategories: [
             {
                 title: "Subcategory1Subcategory1Subcategory1Subcategory1Subcategory1",
@@ -19,14 +20,27 @@ const categoryMap = [
                     "Elem4",
                     "Elem5",
                 ],
+                key: "abba",
             },
-            { title: "Subcategory2", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory3", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory4", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
-            { title: "Subcategory5", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
+            {
+                title: "Subcategory2",
+                sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ],
+            },
+            {
+                title: "Subcategory3",
+                sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ],
+            },
+            {
+                title: "Subcategory4",
+                sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ],
+            },
+            {
+                title: "Subcategory5",
+                sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ],
+            },
         ],
     },
-    { title: "Themes" },
+    { title: "Themes", key: "bbba" },
     {
         title: "Magnets",
         subcategories: [
@@ -36,12 +50,13 @@ const categoryMap = [
             { title: "Subcategory4", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
             { title: "Subcategory5", sections: [ "Elem1", "Elem2", "Elem3", "Elem4", "Elem5" ] },
         ],
+        key: "cbba",
     },
-    { title: "Papeterie" },
-    { title: "Jewelry" },
-    { title: "Replicas" },
-    { title: "Nice&Usefull" },
-    { title: "Sale" },
+    { title: "Papeterie", key: "dbba" },
+    { title: "Jewelry", key: "ebba" },
+    { title: "Replicas", key: "fbba" },
+    { title: "Nice&Usefull", key: "gbba" },
+    { title: "Sale", key: "hbba" },
 ];
 
 const Header = ( { setLanguage, scrolledPastTop, screenWidth } ) => (
@@ -61,45 +76,6 @@ const Header = ( { setLanguage, scrolledPastTop, screenWidth } ) => (
         )}
     </Fragment>
 );
-
-// function buildCategories( categories ) {
-//     return categories.map( ( category, i ) => {
-//         const subcategories = category.subcategories
-//             ? buildSubcategories( category.subcategories )
-//             : null;
-//
-//         const noCategoryClass = subcategories ? "" : "hide-dropdown";
-//
-//         return (
-//             <li className="category" key={ `${ category.title }${ i }` }>
-//                 <span className="title">{category.title}</span>
-//                 <div className={ `menu-dropdown ${ noCategoryClass }` }>
-//                     <div className="subcategories">{subcategories}</div>
-//                 </div>
-//             </li>
-//         );
-//     } );
-// }
-//
-// function buildSubcategories( subcategories ) {
-//     return subcategories.map( ( sub, i ) => {
-//         const sections = sub.sections ? buildSections( sub.sections ) : null;
-//         return (
-//             <div className="subcategory" key={ `${ sub.title }${ i }` }>
-//                 <span className="sub-title">{sub.title}</span>
-//                 <ul className="sections">{sections}</ul>
-//             </div>
-//         );
-//     } );
-// }
-//
-// function buildSections( sections ) {
-//     return sections.map( ( section, index ) => (
-//         <li className="section" key={ `${ section }${ index }` }>
-//             {section}
-//         </li>
-//     ) );
-// }
 
 const mapStateToProps = state => ( {
     screenWidth: state.application.screenWidth,

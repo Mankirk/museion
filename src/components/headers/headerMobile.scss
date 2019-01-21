@@ -54,10 +54,22 @@
                 .sub-title {
                     font-weight: bold;
                     font-size: 16px;
+                    cursor: pointer;
                 }
 
                 .sections {
                     padding-left: 10px;
+                    border-left: solid 1px $secondary;
+                    max-height: 0px;
+                    transition: max-height 0.2s;
+                    overflow-y: auto;
+
+                    &.open {
+                        max-height: 8000px;
+                    }
+
+                    .section {
+                    }
                 }
             }
         }
