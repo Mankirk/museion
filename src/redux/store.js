@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 
+import { apiService } from "./middlewares";
+
 import * as reducers from "./ducks";
 
 export default function configureStore( initialState ) {
@@ -13,7 +15,7 @@ export default function configureStore( initialState ) {
     return createStore(
         rootReducer,
         initialState,
-        composeEnhancers( applyMiddleware( thunkMiddleware ) )
+        composeEnhancers( applyMiddleware( apiService, thunkMiddleware ) )
     );
 }
 

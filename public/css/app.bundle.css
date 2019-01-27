@@ -1,4 +1,561 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);.footer {
+  width: 100%;
+  background-color: #0b3c5d; }
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  padding: 20px 0px 20px 0px; }
+  .footer-container .col-left {
+    width: 50%; }
+  .footer-container .col-right {
+    width: 50%; }
+    .footer-container .col-right .links-title {
+      font-weight: bold;
+      margin-bottom: 10px; }
+    .footer-container .col-right .links {
+      width: 50%; }
+    .footer-container .col-right .link {
+      cursor: pointer; }
+    .footer-container .col-right .link a {
+      color: #fff;
+      text-decoration: none; }
+    .footer-container .col-right .link:hover a {
+      border-bottom: solid 1px #fff; }
+  .footer-container .cr-stripe {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: solid 1px #fff;
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 10px; }
+.header-mobile {
+  width: 100%;
+  border: solid 1px;
+  background-color: #fff;
+  z-index: 2; }
+  .header-mobile .permanent-header {
+    border: solid 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px; }
+    .header-mobile .permanent-header .header-logo {
+      height: 75px;
+      cursor: pointer; }
+    .header-mobile .permanent-header i {
+      font-size: 26px;
+      cursor: pointer; }
+  .header-mobile .mobile-menu {
+    overflow: auto;
+    max-height: 0px;
+    transition: max-height 0.2s; }
+    .header-mobile .mobile-menu .category {
+      list-style: none;
+      border: solid 1px; }
+      .header-mobile .mobile-menu .category .title {
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+        cursor: pointer; }
+      .header-mobile .mobile-menu .category .menu-dropdown {
+        max-height: 0px;
+        transition: max-height 0.2s;
+        overflow-y: auto;
+        padding-left: 30px; }
+      .header-mobile .mobile-menu .category .menu-dropdown.open {
+        max-height: 8000px; }
+      .header-mobile .mobile-menu .category .subcategory .sub-title {
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer; }
+      .header-mobile .mobile-menu .category .subcategory .sections {
+        padding-left: 10px;
+        border-left: solid 1px #328cc1;
+        max-height: 0px;
+        transition: max-height 0.2s;
+        overflow-y: auto; }
+        .header-mobile .mobile-menu .category .subcategory .sections.open {
+          max-height: 8000px; }
+  .header-mobile.open .mobile-menu {
+    max-height: 50vh; }
+  .header-mobile.open i {
+    color: #0b3c5d; }
+  .header-mobile.shadow {
+    box-shadow: 0px 5px 8px #696969; }
+.header {
+  background-color: #fff; }
+  .header.shadow {
+    box-shadow: 0px 5px 8px #696969; }
+
+.top-register {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; }
+  .top-register .lang-choice {
+    display: flex; }
+    .top-register .lang-choice img {
+      height: 32px;
+      width: 32px;
+      margin-left: 10px;
+      cursor: pointer; }
+  .top-register h2 {
+    font-size: 18px;
+    font-weight: bold; }
+  .top-register .lang-choice,
+  .top-register h2 {
+    margin-bottom: 20px; }
+
+.bottom-register .categories {
+  display: flex;
+  flex-wrap: wrap; }
+  .bottom-register .categories .category {
+    outline: solid 1px;
+    font-size: 20px; }
+    .bottom-register .categories .category .title {
+      width: 100%;
+      height: 100%;
+      padding: 4px 10px 4px 10px;
+      display: block;
+      cursor: pointer; }
+    .bottom-register .categories .category:hover {
+      background-color: #eeefff; }
+      .bottom-register .categories .category:hover .title {
+        color: #0b3c5d;
+        font-weight: bold; }
+      .bottom-register .categories .category:hover .menu-dropdown {
+        display: block; }
+        .bottom-register .categories .category:hover .menu-dropdown.hide-dropdown {
+          display: none; }
+
+.bottom-register .menu-dropdown {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  background: #fff;
+  display: none;
+  border: solid 1px #aaabb8; }
+  .bottom-register .menu-dropdown .subcategories {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-top: 0px; }
+    .bottom-register .menu-dropdown .subcategories .subcategory {
+      margin-left: 3%;
+      width: 22%;
+      margin-top: 20px; }
+      .bottom-register .menu-dropdown .subcategories .subcategory .sub-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        cursor: pointer;
+        word-break: break-all; }
+        .bottom-register .menu-dropdown .subcategories .subcategory .sub-title:hover {
+          color: #0b3c5d;
+          font-weight: bold; }
+      .bottom-register .menu-dropdown .subcategories .subcategory .sections {
+        margin-bottom: 6px; }
+        .bottom-register .menu-dropdown .subcategories .subcategory .sections .section {
+          cursor: pointer;
+          width: fit-content;
+          word-break: break-all; }
+        .bottom-register .menu-dropdown .subcategories .subcategory .sections .section:hover {
+          color: #0b3c5d;
+          font-weight: bold; }
+.back-to-top {
+  border: none;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  opacity: 0.8;
+  color: #0b3c5d;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  outline: none;
+  box-shadow: 0px 3px 3px #696969; }
+  .back-to-top i {
+    color: #0b3c5d; }
+
+.back-to-top:hover {
+  opacity: 1; }
+.product-grid {
+  border: solid 1px;
+  display: flex;
+  flex-wrap: wrap; }
+  .product-grid .product-box-wrap {
+    width: 25%;
+    padding: 7.5px;
+    position: relative; }
+  .product-grid .product-box {
+    border: solid 1px;
+    height: 300px;
+    width: 100%;
+    background-color: #fff;
+    display: flex; }
+    .product-grid .product-box .image-box {
+      position: relative;
+      height: 175px;
+      display: flex;
+      justify-content: center; }
+      .product-grid .product-box .image-box img {
+        position: absolute;
+        max-height: 13rem;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        display: block; }
+    .product-grid .product-box .product-details {
+      margin: 0px;
+      padding: 0px; }
+    .product-grid .product-box .product-title {
+      max-height: 1.2em;
+      line-height: 1.2em;
+      overflow: hidden;
+      word-break: normal; }
+    .product-grid .product-box .product-subtitle {
+      font-size: 12px;
+      height: 2.4em;
+      line-height: 1.2em;
+      overflow: hidden;
+      word-break: normal; }
+    .product-grid .product-box .product-description {
+      height: 4.8em;
+      line-height: 1.2em;
+      overflow: hidden;
+      word-break: normal; }
+    .product-grid .product-box .permanent-content {
+      width: 100%;
+      padding: 15px; }
+    .product-grid .product-box .hover-content {
+      display: none;
+      outline: solid 1px;
+      width: 70px; }
+      .product-grid .product-box .hover-content .img {
+        margin-bottom: 10px; }
+    .product-grid .product-box:hover {
+      position: absolute;
+      right: 0;
+      z-index: 3;
+      box-shadow: 5px 5px 5px #696969;
+      width: calc(100% + 70px);
+      height: 100%; }
+      .product-grid .product-box:hover .hover-content {
+        display: block; }
+html,
+body,
+#app {
+  position: relative;
+  height: 100%;
+  color: #696969;
+  font-family: Open Sans, sans-serif; }
+
+* {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none;
+  color: #696969; }
+
 .app-root {
-  outline: solid; }
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+.header {
+  height: 174px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10; }
+  .header .header-container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto; }
+
+.header-mobile {
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+.main-content {
+  margin-top: 180px;
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  flex: 1 0 auto; }
+
+.footer {
+  flex-shrink: 0; }
+  .footer .footer-container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto; }
+/*
+  HTML5 Reset :: style.css
+  ----------------------------------------------------------
+  We have learned much from/been inspired by/taken code where offered from:
+
+  Eric Meyer          :: http://meyerweb.com
+  HTML5 Doctor        :: http://html5doctor.com
+  and the HTML5 Boilerplate :: http://html5boilerplate.com
+
+-------------------------------------------------------------------------------*/
+/* Let"s default this puppy out
+-------------------------------------------------------------------------------*/
+html,
+body,
+body div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+figure,
+footer,
+header,
+menu,
+nav,
+section,
+time,
+mark,
+audio,
+video,
+details,
+summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent; }
+
+article,
+aside,
+figure,
+footer,
+header,
+nav,
+section,
+details,
+summary {
+  display: block; }
+
+/* Handle box-sizing while better addressing child elements:
+   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+  box-sizing: border-box; }
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit; }
+
+/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
+/* Responsive images and other embedded objects
+   Note: keeping IMG here will cause problems if you"re using foreground images as sprites.
+   If this default setting for images is causing issues, you might want to replace it with a .responsive class instead. */
+img,
+object,
+embed {
+  max-width: 100%;
+  height: auto; }
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {
+  overflow-y: scroll; }
+
+/* we use a lot of ULs that aren"t bulleted.
+  don"t forget to restore the bullets within content. */
+ul {
+  list-style: none; }
+
+blockquote,
+q {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none; }
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+del {
+  text-decoration: line-through; }
+
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted #000;
+  cursor: help; }
+
+/* tables still need cellspacing="0" in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+th {
+  font-weight: bold;
+  vertical-align: bottom; }
+
+td {
+  font-weight: normal;
+  vertical-align: top; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 0;
+  clear: both; }
+
+input,
+select {
+  vertical-align: middle; }
+
+pre {
+  white-space: pre;
+  /* CSS2 */
+  white-space: pre-wrap;
+  /* CSS 2.1 */
+  white-space: pre-line;
+  /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word;
+  /* IE */ }
+
+input[type="radio"] {
+  vertical-align: text-bottom; }
+
+input[type="checkbox"] {
+  vertical-align: bottom; }
+
+.ie7 input[type="checkbox"] {
+  vertical-align: baseline; }
+
+.ie6 input {
+  vertical-align: text-bottom; }
+
+select,
+input,
+textarea {
+  font: 99% sans-serif; }
+
+table {
+  font-size: inherit;
+  font: 100%; }
+
+small {
+  font-size: 85%; }
+
+td,
+td img {
+  vertical-align: top; }
+
+/* Make sure sup and sub don"t mess with your line-heights http://gist.github.com/413930 */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* standardize any monospaced elements */
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace, sans-serif; }
+
+/* hand cursor on clickable elements */
+.clickable,
+input[type="button"],
+input[type="submit"],
+input[type="file"],
+button {
+  cursor: pointer;
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button,
+input,
+select,
+textarea {
+  margin: 0; }
+
+/* make buttons play nice in IE */
+button,
+input[type="button"] {
+  width: auto;
+  overflow: visible; }
 
 /*# sourceMappingURL=app.bundle.css.map*/

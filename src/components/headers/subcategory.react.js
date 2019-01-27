@@ -37,7 +37,11 @@ class Subcategory extends Component {
 }
 
 function buildSections( sections ) {
-    return sections.map( item => <li className="section">{item}</li> );
+    return sections.map( ( item, i ) => (
+        <li className="section" key={ item + i }>
+            {item}
+        </li>
+    ) );
 }
 
 export default Subcategory;

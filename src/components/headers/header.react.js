@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { Dictionary } from "../../helpers";
 
 import "./header.scss";
@@ -11,7 +11,10 @@ const HeaderDesktop = ( { setLanguage, scrolledPastTop, categoryMap } ) => {
         <div className={ `header ${ shadowClass }` }>
             <div className="header-container">
                 <div className="top-register">
-                    <img className="header-logo" src="images/main-logo.png" alt="" />
+                    <Link to="/">
+                        <img className="header-logo" src="images/main-logo.png" alt="" />
+                    </Link>
+
                     <h2>{Dictionary[ window.userLang ].header.contactInfo}</h2>
                     <div className="lang-choice">
                         <img

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Category from "./category.react";
 import "./headerMobile.scss";
 
@@ -26,7 +27,10 @@ class HeaderMobile extends Component {
         return (
             <div className={ `header-mobile ${ menuClass } ${ shadowClass }` }>
                 <div className="permanent-header">
-                    <img className="header-logo" src="images/main-logo.png" alt="" />
+                    <Link to="/">
+                        <img className="header-logo" src="images/main-logo.png" alt="" />
+                    </Link>
+
                     <i className="fas fa-bars" onClick={ () => this.toggleMenu() } />
                 </div>
                 <ul className="mobile-menu ">{categories}</ul>
@@ -36,7 +40,9 @@ class HeaderMobile extends Component {
 }
 
 function buildCategories( categories ) {
-    return categories.map( category => <Category categoryData={ category } /> );
+    return categories.map( ( category, i ) => (
+        <Category categoryData={ category } key={ category.title + i } />
+    ) );
 }
 
 export default HeaderMobile;

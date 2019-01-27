@@ -1,3 +1,5 @@
+import fetchWrapper from "./fetchWrapper";
+
 export default {
     scrollToElement( parent, element ) {
         parent.scrollTo( {
@@ -6,4 +8,5 @@ export default {
             top: element.getBoundingClientRect().top + ( parent.scrollY || parent.pageYOffset ),
         } );
     },
+    fetchWrapper,
 };

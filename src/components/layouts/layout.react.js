@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { applicationOperations } from "../../redux/ducks/application";
@@ -7,6 +6,7 @@ import { applicationOperations } from "../../redux/ducks/application";
 import Header from "../headers";
 import Footer from "../footers/footer.react";
 import BackToTopArrow from "../backToTopArrow/backToTopArrow.react";
+import { ProductGrid, ProductSlider } from "../product";
 
 import "./normalize.scss";
 import "./layout.scss";
@@ -59,7 +59,11 @@ class Layout extends Component {
         return (
             <div className="app-root">
                 <Header scrolledPastTop={ this.state.scrolledPastTop } />
-                <div className="main-content">{placeholder}</div>
+                <div className="main-content">
+                    <ProductSlider />
+                    <ProductGrid />
+                    {placeholder}
+                </div>
                 <Footer />
                 <BackToTopArrow scrolledPastTop={ this.state.scrolledPastTop } />
             </div>

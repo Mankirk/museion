@@ -1,0 +1,92 @@
+@import "../../styles/helpers.scss";
+
+.product-box-wrap {
+    width: 25%;
+    padding: 7.5px;
+    position: relative;
+}
+
+.product-box {
+    border: solid 1px;
+    height: 300px;
+    width: 100%;
+    height: 100%;
+    background-color: $white;
+    display: flex;
+    position: relative;
+
+    .image-box {
+        position: relative;
+        height: 175px;
+        display: flex;
+        justify-content: center;
+
+        img {
+            position: absolute;
+            max-height: 13rem;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    .product-details {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .product-title {
+        max-height: 1.2em;
+        line-height: 1.2em;
+        overflow: hidden;
+        word-break: normal;
+    }
+
+    .product-subtitle {
+        font-size: 12px;
+        height: 2.4em;
+        line-height: 1.2em;
+        overflow: hidden;
+        word-break: normal;
+    }
+
+    .product-description {
+        height: 4.8em;
+        line-height: 1.2em;
+        overflow: hidden;
+        word-break: normal;
+    }
+
+    .permanent-content {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .hover-content {
+        display: none;
+        outline: solid 1px;
+        width: 70px;
+        .img {
+            margin-bottom: 10px;
+        }
+    }
+
+    &:hover {
+        z-index: 3;
+        height: auto;
+        box-shadow: 5px 5px 5px $secondary;
+    }
+
+    &.side-slide-active:hover {
+        width: calc(100% + 56px);
+        right: 6.5px;
+        position: absolute;
+
+        .hover-content {
+            display: block;
+        }
+    }
+}

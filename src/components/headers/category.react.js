@@ -40,7 +40,9 @@ class Category extends Component {
 }
 
 function buildSubcategories( subcategories ) {
-    return subcategories.map( item => <Subcategory subcategoryData={ item } /> );
+    return subcategories.map( ( item, i ) => (
+        <Subcategory subcategoryData={ item } key={ item.title + i } />
+    ) );
 }
 
 export default Category;
