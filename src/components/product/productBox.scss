@@ -69,6 +69,7 @@
         display: none;
         outline: solid 1px;
         width: 70px;
+        display: none;
         .img {
             margin-bottom: 10px;
         }
@@ -81,9 +82,18 @@
     }
 
     &.side-slide-active:hover {
-        width: calc(100% + 56px);
-        right: 6.5px;
-        position: absolute;
+        @media ( #{ $bp-725 } ) {
+            position: absolute;
+            width: calc(100% + 56px);
+
+            &.left {
+                right: 6.5px;
+            }
+
+            &.right {
+                left: 7.5px;
+            }
+        }
 
         .hover-content {
             display: block;

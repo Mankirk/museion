@@ -18,27 +18,42 @@ class ProductGrid extends Component {
     }
 
     render() {
-        console.log( "renderung" );
-        const { productList } = this.props;
+        const { productList, screenWidth } = this.props;
 
-        const products = buildProducts( productList );
+        const products = buildProducts( productList, screenWidth );
 
         return <div className="product-grid">{products}</div>;
     }
 }
 
-function buildProducts( products ) {
-    return products.map( ( product, index ) => (
-        <div className="product-box-wrap" key={ product.sku + index }>
-            <Link to={ product.slug }>
-                <ProductBox product={ product } />
-            </Link>
-        </div>
-    ) );
+function buildProducts( products, screenWidth ) {
+    return products.map( ( product, index ) => {
+        const isLeftElement = findLeftElement( index, screenWidth );
+        return (
+            <div className="product-box-wrap" key={ product.sku + index }>
+                <Link to={ product.slug }>
+                    <ProductBox product={ product } isLeftElement={ isLeftElement } />
+                </Link>
+            </div>
+        );
+    } );
+}
+
+function findLeftElement( index, screenWidth ) {
+    if ( screenWidth < 1000 && ( index + 1 ) % 3 === 1 ) {
+        return true;
+    }
+
+    if ( ( screenWidth > 1000, ( index + 1 ) % 4 === 1 ) ) {
+        return true;
+    }
+
+    return false;
 }
 
 const mapStateToProps = state => ( {
     productList: state.product.list,
+    screenWidth: state.application.screenWidth,
 } );
 
 const mapDispatchToProps = {

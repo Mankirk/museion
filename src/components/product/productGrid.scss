@@ -5,3 +5,19 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.product-grid .product-box-wrap {
+    width: 100%;
+
+    @media ( #{ $bp-480 } ) {
+        width: 50%;
+    }
+
+    @media ( #{ $bp-725 } ) {
+        width: calc(100% / 3);
+    }
+
+    @media ( #{ $bp-1000 } ) {
+        width: 25%;
+    }
+}

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+import { ProductBox } from "../product";
 import "./slider.scss";
 
 class ImageSlider extends Component {
@@ -32,10 +34,12 @@ class ImageSlider extends Component {
 
     render() {
         const { currentIndex } = this.state;
-        const { elements, numberOfImages, sliderSettings } = this.props;
+        const { elements, type, numberOfImages, sliderSettings } = this.props;
         const { elementWidth, elementsToDisplay } = sliderSettings;
 
         const trackWidth = elementWidth * numberOfImages;
+
+        const displayElements = buildDisplayElements( elements, type, currentIndex );
 
         const atLeftEnd = currentIndex === 0;
         const atRightEnd = numberOfImages - elementsToDisplay === currentIndex;
@@ -55,7 +59,7 @@ class ImageSlider extends Component {
 
                 <div className="slider">
                     <div className="slider-track" style={ trackStyles }>
-                        {elements}
+                        {displayElements}
                     </div>
                 </div>
 
@@ -67,6 +71,27 @@ class ImageSlider extends Component {
             </div>
         );
     }
+}
+
+function buildDisplayElements( elements, type, currentIndex ) {
+    if ( type === "PRODUCT_BOXES" ) {
+        return elements.map( ( product, index ) => {
+            const isLeftElement = index === currentIndex;
+            return (
+                <div className="product-box-wrap" key={ product.key }>
+                    <Link to="/">
+                        <ProductBox
+                            product={ product }
+                            key={ product.sku }
+                            isLeftElement={ isLeftElement }
+                        />
+                    </Link>
+                </div>
+            );
+        } );
+    }
+
+    return [];
 }
 
 export default ImageSlider;
