@@ -2,8 +2,7 @@ import fetchWrapper from "../../helpers/utils/fetchWrapper";
 
 const baseUrl = "http://localhost:3030";
 
-const apiService = store => next => action => {
-    console.log( store );
+const apiService = () => next => action => {
     const result = next( action );
 
     if ( !action.async ) {

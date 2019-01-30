@@ -8,7 +8,29 @@ import "./productSlider.scss";
 
 const sliderSettings = {
     elementWidth: 250,
-    elementsToDisplay: 4,
+    slidesToShow: 4,
+    responsive: [
+        {
+            bp: 0,
+            slidesToShow: 1,
+            dots: false,
+        },
+        {
+            bp: 480,
+            slidesToShow: 2,
+            dots: false,
+        },
+        {
+            bp: 725,
+            slidesToShow: 3,
+            dots: false,
+        },
+        {
+            bp: 1000,
+            slidesToShow: 4,
+            dots: false,
+        },
+    ],
 };
 
 const ProductSlider = ( { products } ) => {
