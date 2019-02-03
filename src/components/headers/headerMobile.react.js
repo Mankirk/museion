@@ -13,26 +13,40 @@ class HeaderMobile extends Component {
         this.toggleMenu = this.toggleMenu.bind( this );
     }
 
+    componentWillMount() {
+        const { inProductList } = this.props;
+
+        if ( inProductList ) {
+            this.setState( { menuOpen: true } );
+        }
+    }
+
     toggleMenu() {
         this.setState( { menuOpen: !this.state.menuOpen } );
     }
 
     render() {
-        const { /* setLanguage, */ scrolledPastTop, categoryMap } = this.props;
+        const { /* setLanguage, */ scrolledPastTop, categoryMap, inProductList } = this.props;
 
         const shadowClass = scrolledPastTop ? "shadow" : "";
         const menuClass = this.state.menuOpen ? "open" : "closed";
         const categories = buildCategories( categoryMap );
+        const productListClass = inProductList ? "in-product-list" : "";
 
         return (
-            <div className={ `header-mobile ${ menuClass } ${ shadowClass }` }>
-                <div className="permanent-header">
-                    <Link to="/">
-                        <img className="header-logo" src="images/main-logo.png" alt="" />
-                    </Link>
+            <div className={ `header-mobile ${ menuClass } ${ shadowClass } ${ productListClass }` }>
+                {!inProductList ? (
+                    <div className="permanent-header">
+                        <Link to="/">
+                            <img className="header-logo" src="images/main-logo.png" alt="" />
+                        </Link>
 
-                    <i className="fas fa-bars" onClick={ () => this.toggleMenu() } />
-                </div>
+                        <i className="fas fa-bars" onClick={ () => this.toggleMenu() } />
+                    </div>
+                ) : (
+                    ""
+                )}
+
                 <ul className="mobile-menu ">{categories}</ul>
             </div>
         );

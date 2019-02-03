@@ -70,8 +70,8 @@ function buildSubcategories( subcategories ) {
 
 function buildSections( sections ) {
     return sections.map( ( section, index ) => (
-        <li className="section" key={ `${ section }${ index }` }>
-            {section}
+        <li className="section" key={ `${ section.title }${ index }` }>
+            {section.title}
         </li>
     ) );
 }

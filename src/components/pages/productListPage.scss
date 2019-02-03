@@ -1,0 +1,36 @@
+@import "../../styles/helpers.scss";
+
+.product-list-page {
+    display: flex;
+    flex-wrap: wrap;
+
+    .header-mobile {
+        display: none;
+    }
+
+    .list-proper {
+        width: 100%;
+    }
+
+    @media (min-width: 850px) {
+        .header-mobile {
+            display: block;
+            position: relative;
+            width: 25%;
+            z-index: 1;
+            margin-top: 10px;
+
+            .mobile-menu {
+                max-height: 4000px;
+            }
+        }
+
+        .list-proper {
+            width: 75%;
+            //
+            // .product-box-wrap {
+            //     width: calc(100% / 3);
+            // }
+        }
+    }
+}

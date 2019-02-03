@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { applicationOperations } from "../../redux/ducks/application";
+import { sitemapOperations } from "../../redux/ducks/sitemap";
 import { baseRoutes } from "../pages/routes";
 
 import Header from "../headers";
@@ -22,6 +23,8 @@ class Layout extends Component {
         this.saveWindowSize = this.saveWindowSize.bind( this );
     }
     componentDidMount() {
+        const { getSitemap } = this.props;
+        getSitemap();
         this.saveWindowSize();
         window.addEventListener( "resize", this.saveWindowSize );
         window.addEventListener( "scroll", this.onScroll );
@@ -56,10 +59,9 @@ class Layout extends Component {
         //     </p> );
         // }
 
-        const routeElements = baseRoutes.map( ( route, index ) => {
-            console.log( "route", route );
-            return <Route key={ index } { ...route } />;
-        } );
+        const routeElements = baseRoutes.map( ( route, index ) =>
+            // console.log( "route", route );
+            <Route key={ index } { ...route } /> );
 
         return (
             <div className="app-root">
@@ -79,11 +81,13 @@ class Layout extends Component {
 const mapStateToProps = state => ( {
     height: state.application.height,
     width: state.application.width,
+    sitemap: state.sitemap,
 } );
 
 const mapDispatchToProps = {
     setWindowHeight: applicationOperations.setWindowHeight,
     setWindowWidth: applicationOperations.setWindowWidth,
+    getSitemap: sitemapOperations.getSitemap,
 };
 
 export default connect(

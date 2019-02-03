@@ -11,7 +11,8 @@ const productSchema = new Schema( {
     sku: { type: Number, required: true },
     description: { type: String, required: true },
     category: { type: String, required: true },
-    subcategory: { type: String, required: true },
+    subcategory: { type: String, required: false },
+    section: { type: String, required: false },
     slug: { type: String },
     images: {
         main: {
@@ -25,8 +26,8 @@ productSchema.methods.setId = function() {
     this.id = uid( 10 );
 };
 
-productSchema.methods.setSlug = function( slug ) {
-    this.slug = `/products/${ slug }`;
+productSchema.methods.setSlug = function() {
+    this.slug = `/products/${ this.category }/${ this.subcategory }/${ this.sku }`;
 };
 
 module.exports = mongoose.model( "Product", productSchema );

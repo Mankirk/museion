@@ -14,6 +14,7 @@ app.use( cors( {
 } ) );
 
 require( "./models/product" );
+require( "./models/category" );
 
 // app.use( ( req, res, next ) => {
 //     console.log( "REQUEST----------------" );

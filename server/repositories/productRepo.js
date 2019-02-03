@@ -21,7 +21,7 @@ const createProduct = ( req, res ) => {
     const product = new Product( req.body.payload );
 
     product.setId();
-    product.setSlug( req.body.payload.sku );
+    product.setSlug();
     product.save( ( err, savedProduct ) => {
         if ( err ) {
             console.log( "err", err );
