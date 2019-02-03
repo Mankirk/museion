@@ -67,9 +67,10 @@
 
     .hover-content {
         display: none;
-        outline: solid 1px;
-        width: 70px;
+        width: 90px;
         display: none;
+        padding: 5px;
+        background-color: $secondary;
         .img {
             margin-bottom: 10px;
         }

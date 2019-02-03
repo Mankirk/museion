@@ -19,7 +19,7 @@ if ( !dev ) {
             analyzerMode: "static",
             reportFilename: "webpack-report.html",
             openAnalyzer: false,
-        } ),
+        } )
     );
 }
 
@@ -91,4 +91,7 @@ module.exports = {
         },
     },
     plugins,
+    devServer: {
+        historyApiFallback: true,
+    },
 };

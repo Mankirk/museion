@@ -1,0 +1,60 @@
+@import "../../../styles/helpers.scss";
+
+.product-showcase {
+    border: solid 1px;
+    margin: 10px 0px;
+    margin-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .title {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        border: solid 1px;
+        justify-content: center;
+
+        .image-wrapper {
+            border: solid 2px $grey;
+            height: 100px;
+            width: 100px;
+            padding: 0px 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-right: 20px;
+
+            img {
+                padding: 10px;
+                position: absolute;
+                max-height: 80px;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                display: block;
+            }
+
+            &:hover {
+                border: solid 2px $secondary;
+            }
+        }
+    }
+
+    .main-image {
+        padding: 20px 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media ( #{ $bp-1000 } ) {
+        .sidebar {
+            justify-content: flex-start;
+        }
+    }
+}

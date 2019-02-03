@@ -15,14 +15,14 @@ app.use( cors( {
 
 require( "./models/product" );
 
-app.use( ( req, res, next ) => {
-    console.log( "REQUEST----------------" );
-    console.log( "url: ", req.url );
-    console.log( "method: ", req.method );
-    console.log( "-----------------------" );
-
-    next();
-} );
+// app.use( ( req, res, next ) => {
+//     console.log( "REQUEST----------------" );
+//     console.log( "url: ", req.url );
+//     console.log( "method: ", req.method );
+//     console.log( "-----------------------" );
+//
+//     next();
+// } );
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: false } ) );
@@ -31,5 +31,13 @@ app.use( customResponses );
 
 require( "./config/mongoose" )( app );
 require( "./config/routes" )( app );
+
+app.get( "/*", function( req, res ) {
+    res.sendFile( path.join( __dirname, "../public/index.html" ), function( err ) {
+        if ( err ) {
+            res.status( 500 ).send( err );
+        }
+    } );
+} );
 
 app.listen( port, console.log( "server online at port:", port ) );

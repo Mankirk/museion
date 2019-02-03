@@ -1,0 +1,18 @@
+@import "../../styles/helpers.scss";
+
+.product-details {
+    @media (min-width: 1000px) {
+        display: flex;
+        flex-wrap: wrap;
+        .top-half {
+            width: 70%;
+        }
+        .details-box-container {
+            width: 30%;
+        }
+
+        .product-description-container {
+            width: 100%;
+        }
+    }
+}

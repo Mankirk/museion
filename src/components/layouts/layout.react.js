@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import { Route, Switch } from "react-router-dom";
 import { applicationOperations } from "../../redux/ducks/application";
+import { baseRoutes } from "../pages/routes";
 
 import Header from "../headers";
 import Footer from "../footers/footer.react";
 import BackToTopArrow from "../backToTopArrow/backToTopArrow.react";
-import { ProductGrid, ProductSlider } from "../product";
 
 import "./normalize.scss";
 import "./layout.scss";
@@ -56,12 +56,17 @@ class Layout extends Component {
         //     </p> );
         // }
 
+        const routeElements = baseRoutes.map( ( route, index ) => {
+            console.log( "route", route );
+            return <Route key={ index } { ...route } />;
+        } );
+
         return (
             <div className="app-root">
                 <Header scrolledPastTop={ this.state.scrolledPastTop } />
                 <div className="main-content">
-                    <ProductSlider />
-                    <ProductGrid />
+                    <Switch>{routeElements}</Switch>
+
                     {placeholder}
                 </div>
                 <Footer />
