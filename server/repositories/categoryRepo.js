@@ -2,6 +2,18 @@ const mongoose = require( "mongoose" );
 
 const Category = mongoose.model( "Category" );
 const uid = require( "uid" );
+//
+// const buildUrl = product => {
+//     if ( product.category && product.subcategory && product.section ) {
+//         return `products/${ product.category }/${ product.subcategory }/${ product.section }`;
+//     }
+//
+//     if ( product.category && product.subcategory ) {
+//         return `products/${ product.category }/${ product.subcategory }`;
+//     }
+//
+//     return `products/${ product.category }`;
+// };
 
 const getCategories = ( req, res, next ) => {
     let selectionField = req.headers.selectionField;
@@ -39,19 +51,35 @@ const createCategory = ( req, res, next ) => {
         newCategory.setKey();
         newCategory.title = product.category;
         newCategory.url = `${ product.category }`;
+        const categoryKey = uid( 10 );
         newCategory.subcategories = [
             {
                 title: product.subcategory,
-                key: uid( 10 ),
-                url: `${ product.category }/${ product.subcategory }`,
-                parentKey: newCategory.key,
+                key: categoryKey,
+                url: `products/${ product.category }`,
                 image: "",
-                sections: [
-                    {
-                        title: product.section,
-                        url: `${ product.category }/${ product.subcategory }/${ product.section }`,
-                    },
-                ],
+                subcategories: product.subcategory
+                    ? [
+                        {
+                            title: product.section,
+                            url: `products/${ product.category }/${ product.subcategory }/${
+                                product.section
+                            }`,
+
+                            image: "",
+                            sections: product.section
+                                ? [
+                                    {
+                                        title: product.section,
+                                        url: `products/${ product.category }/${
+                                            product.subcategory
+                                        }/${ product.section }`,
+                                    },
+                                ]
+                                : null,
+                        },
+                    ]
+                    : null,
             },
         ];
         newCategory.save( ( err, savedCategory ) => {
@@ -87,10 +115,7 @@ const editCategory = ( req, res, next ) => {
             req.category = category;
             return next();
         } );
-
-        // return res.success( editedCategory );
     }
-    return next();
 };
 
 function getNewSubCategories( subcategories, product ) {
@@ -100,13 +125,17 @@ function getNewSubCategories( subcategories, product ) {
         const newSubcategory = {
             title: product.subcategory,
             image: "",
-            url: `${ product.category }/${ product.subcategory }`,
-            sections: [
-                {
-                    title: product.section,
-                    url: `${ product.category }/${ product.subcategory }/${ product.section }`,
-                },
-            ],
+            url: `products/${ product.category }/${ product.subcategory }`,
+            sections: product.section
+                ? [
+                    {
+                        title: product.section,
+                        url: `products/${ product.category }/${ product.subcategory }/${
+                            product.section
+                        }`,
+                    },
+                ]
+                : null,
             key: uid( 10 ),
         };
         const newSubcategories = subcategories.push( newSubcategory );
@@ -120,7 +149,7 @@ function getNewSubCategories( subcategories, product ) {
     }
     const newSection = {
         title: product.section,
-        url: `${ product.category }/${ product.subcategory }/${ product.section }`,
+        url: `products/${ product.category }/${ product.subcategory }/${ product.section }`,
     };
     const newSections = subcategories[ subcategoryIndex ].sections.push( newSection );
     subcategories[ subcategoryIndex ].sections = newSections;

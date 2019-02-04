@@ -22,7 +22,6 @@ const categorySchema = new Schema( {
             {
                 title: { type: String, required: true },
                 key: { type: String, required: true },
-                parentKey: { type: String, required: true },
                 image: { type: String, required: false },
                 sections: {
                     type: [

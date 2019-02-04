@@ -19,7 +19,6 @@ const getProducts = ( req, res ) => {
 
 const createProduct = ( req, res ) => {
     const product = new Product( req.body.payload );
-
     product.setId();
     product.setSlug();
     product.save( ( err, savedProduct ) => {

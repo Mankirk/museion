@@ -117,7 +117,7 @@ function buildDisplayElements( elements, type, currentIndex, elementWidth ) {
 
             return (
                 <div className="product-box-wrap" key={ product.key } style={ productStyles }>
-                    <Link to="/">
+                    <Link to={ product.slug }>
                         <ProductBox
                             product={ product }
                             key={ product.sku }

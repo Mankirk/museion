@@ -27,7 +27,7 @@ productSchema.methods.setId = function() {
 };
 
 productSchema.methods.setSlug = function() {
-    this.slug = `/products/${ this.category }/${ this.subcategory }/${ this.sku }`;
+    this.slug = `/product/${ this.category }/${ this.subcategory }/${ this.sku }`;
 };
 
 module.exports = mongoose.model( "Product", productSchema );

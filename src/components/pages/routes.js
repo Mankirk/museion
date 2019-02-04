@@ -7,8 +7,8 @@ const exact = true;
 
 const baseRoutes = [
     route( "/", HomePage, exact ),
-    route( "/productList", ProductListPage ),
-    route( "/404", NotFoundPage ),
+    route( "/products", ProductListPage ),
+    route( "/404", NotFoundPage, exact ),
     route( "/product", ProductDetailsPage ),
 ];
 
