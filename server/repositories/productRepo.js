@@ -3,10 +3,10 @@ const mongoose = require( "mongoose" );
 const Product = mongoose.model( "Product" );
 
 const getProducts = ( req, res ) => {
-    const { selectionfield, selectionvalue } = req.headers;
+    const { selectionField, selectionValue } = req.headers;
 
     const queryParams = {};
-    queryParams[ selectionfield ] = selectionvalue;
+    queryParams[ selectionField ] = selectionValue;
 
     Product.find( queryParams, ( err, docs ) => {
         if ( err ) {
@@ -16,6 +16,16 @@ const getProducts = ( req, res ) => {
         return res.success( docs );
     } );
 };
+
+// const getProducts = ( req, res ) => {
+//     Product.find( req.headers, ( err, docs ) => {
+//         if ( err ) {
+//             console.log( "err", err );
+//             return res.serverError();
+//         }
+//         return res.success( docs );
+//     } );
+// };
 
 const createProduct = ( req, res ) => {
     const product = new Product( req.body.payload );

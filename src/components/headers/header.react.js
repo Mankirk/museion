@@ -1,12 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dictionary } from "../../helpers";
 
+import { productOperations } from "../../redux/ducks/product";
 import "./header.scss";
 
-const HeaderDesktop = ( { setLanguage, scrolledPastTop, categoryMap } ) => {
+const HeaderDesktop = ( { setLanguage, scrolledPastTop, categoryMap, fetchProducts } ) => {
     const shadowClass = scrolledPastTop ? "shadow" : "";
-    const categories = buildCategories( categoryMap );
+    const categories = buildCategories( categoryMap, fetchProducts );
     return (
         <div className={ `header ${ shadowClass }` }>
             <div className="header-container">
@@ -37,17 +39,19 @@ const HeaderDesktop = ( { setLanguage, scrolledPastTop, categoryMap } ) => {
     );
 };
 
-function buildCategories( categories ) {
+function buildCategories( categories, fetchProducts ) {
     return categories.map( ( category, i ) => {
         const subcategories = category.subcategories
-            ? buildSubcategories( category.subcategories )
+            ? buildSubcategories( category, fetchProducts )
             : null;
 
         const noCategoryClass = subcategories ? "" : "hide-dropdown";
 
         return (
             <li className="category" key={ `${ category.title }${ i }` }>
-                <span className="title">{category.title}</span>
+                <Link to={ `/${ category.url }` } onClick={ fetchProducts( { category: category.title } ) }>
+                    <span className="title">{category.title}</span>
+                </Link>
                 <div className={ `menu-dropdown ${ noCategoryClass }` }>
                     <div className="subcategories">{subcategories}</div>
                 </div>
@@ -56,24 +60,45 @@ function buildCategories( categories ) {
     } );
 }
 
-function buildSubcategories( subcategories ) {
-    return subcategories.map( ( sub, i ) => {
-        const sections = sub.sections ? buildSections( sub.sections ) : null;
+function buildSubcategories( category, fetchProducts ) {
+    return category.subcategories.map( ( sub, i ) => {
+        const sections = sub.sections ? buildSections( sub, fetchProducts, category ) : null;
         return (
             <div className="subcategory" key={ `${ sub.title }${ i }` }>
-                <span className="sub-title">{sub.title}</span>
+                <Link
+                    to={ `/${ sub.url }` }
+                    onClick={ fetchProducts( { category: category.title, subcategory: sub.title } ) }
+                >
+                    <span className="sub-title">{sub.title}</span>
+                </Link>
                 <ul className="sections">{sections}</ul>
             </div>
         );
     } );
 }
 
-function buildSections( sections ) {
-    return sections.map( ( section, index ) => (
+function buildSections( subcategory, fetchProducts, category ) {
+    return subcategory.sections.map( ( section, index ) => (
         <li className="section" key={ `${ section.title }${ index }` }>
-            {section.title}
+            <Link
+                to={ `/${ section.url }` }
+                onClick={ fetchProducts( {
+                    category: category.title,
+                    subcategory: subcategory.title,
+                    section: section.title,
+                } ) }
+            >
+                {section.title}
+            </Link>
         </li>
     ) );
 }
 
-export default HeaderDesktop;
+const mapDispatchToProps = {
+    fetchProducts: productOperations.fetchProducts,
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)( HeaderDesktop );

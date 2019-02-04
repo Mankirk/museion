@@ -47,36 +47,24 @@ const createCategory = ( req, res, next ) => {
 
     if ( category.length === 0 ) {
         const newCategory = new Category();
-
+        console.log( "section", product.section );
         newCategory.setKey();
         newCategory.title = product.category;
-        newCategory.url = `${ product.category }`;
+        newCategory.url = `products/${ product.category }`;
         const categoryKey = uid( 10 );
         newCategory.subcategories = [
             {
                 title: product.subcategory,
                 key: categoryKey,
-                url: `products/${ product.category }`,
+                url: `products/${ product.category }/${ product.subcategory }`,
                 image: "",
-                subcategories: product.subcategory
+                sections: product.section
                     ? [
                         {
                             title: product.section,
                             url: `products/${ product.category }/${ product.subcategory }/${
                                 product.section
                             }`,
-
-                            image: "",
-                            sections: product.section
-                                ? [
-                                    {
-                                        title: product.section,
-                                        url: `products/${ product.category }/${
-                                            product.subcategory
-                                        }/${ product.section }`,
-                                    },
-                                ]
-                                : null,
                         },
                     ]
                     : null,
