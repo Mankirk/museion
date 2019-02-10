@@ -1,34 +1,49 @@
 const mongoose = require( "mongoose" );
 
 const Category = mongoose.model( "Category" );
-const uid = require( "uid" );
+
+// const getCategories = ( req, res, next ) => {
+//     let selectionField = req.headers.selectionField;
+//     let selectionValue = req.headers.selectionValue;
+//     const product = req.body.payload;
 //
-// const buildUrl = product => {
-//     if ( product.category && product.subcategory && product.section ) {
-//         return `products/${ product.category }/${ product.subcategory }/${ product.section }`;
+//     if ( product ) {
+//         selectionField = "title";
+//         selectionValue = product.category;
 //     }
 //
-//     if ( product.category && product.subcategory ) {
-//         return `products/${ product.category }/${ product.subcategory }`;
-//     }
+//     const queryParams = {};
+//     queryParams[ selectionField ] = selectionValue;
 //
-//     return `products/${ product.category }`;
+//     console.log( "queryParams", queryParams );
+//
+//     Category.find( queryParams, ( err, docs ) => {
+//         if ( err ) {
+//             console.log( "err", err );
+//             return res.serverError();
+//         }
+//
+//         req.category = docs;
+//         return next();
+//     } );
 // };
 
-const getCategories = ( req, res, next ) => {
-    let selectionField = req.headers.selectionField;
-    let selectionValue = req.headers.selectionValue;
-    const product = req.body.payload;
+const getAll = ( req, res, next ) => {
+    Category.find( {}, ( err, docs ) => {
+        if ( err ) {
+            console.log( "err", err );
+            return res.serverError();
+        }
+        req.categories = docs;
+        return next();
+    } );
+};
 
-    if ( product ) {
-        selectionField = "title";
-        selectionValue = product.category;
-    }
+const getCategory = ( req, res, next ) => {
+    const category = req.body.category;
 
     const queryParams = {};
-    queryParams[ selectionField ] = selectionValue;
-
-    console.log( "queryParams", queryParams );
+    queryParams.key = category.key;
 
     Category.find( queryParams, ( err, docs ) => {
         if ( err ) {
@@ -42,6 +57,75 @@ const getCategories = ( req, res, next ) => {
 };
 
 const createCategory = ( req, res, next ) => {
+    const categoryToCreate = req.body.category;
+    const foundCategory = req.category;
+
+    if ( foundCategory.length === 0 ) {
+        const newCategory = new Category();
+        // newCategory.setKey();
+        newCategory.title = categoryToCreate.title;
+        newCategory.url = `products/${ categoryToCreate.title }`;
+        newCategory.key = categoryToCreate.key;
+
+        newCategory.save( ( err, savedCategory ) => {
+            if ( err ) {
+                console.log( "err", err );
+                return res.serverError();
+            }
+
+            req.category = savedCategory;
+            return next();
+        } );
+    } else {
+        return res.preconditionFailed( "item already exists" );
+    }
+};
+
+const editCategory = ( req, res, next ) => {
+    const categoryToEdit = req.body.category;
+    // const foundCategory = req.category;
+
+    const queryParams = {};
+    queryParams.key = categoryToEdit.key;
+
+    categoryToEdit.url = `products/${ categoryToEdit.title }`;
+
+    Category.updateOne( queryParams, categoryToEdit, err => {
+        if ( err ) {
+            console.log( "err", err );
+            return res.serverError();
+        }
+
+        req.category = categoryToEdit;
+        return next();
+    } );
+};
+
+const deleteCategory = ( req, res, next ) => {
+    const categoryToDelete = req.body.category;
+
+    const queryParams = {};
+    queryParams.key = categoryToDelete.key;
+
+    Category.deleteMany( queryParams, err => {
+        if ( err ) {
+            console.log( "err", err );
+            return res.serverError();
+        }
+        return next();
+    } );
+};
+
+module.exports = {
+    getAll,
+    getCategory,
+    createCategory,
+    editCategory,
+    deleteCategory,
+};
+
+/*
+const createCategory2 = ( req, res, next ) => {
     const category = req.category;
     const product = req.body.payload;
 
@@ -82,8 +166,10 @@ const createCategory = ( req, res, next ) => {
     }
     return next();
 };
+*/
 
-const editCategory = ( req, res, next ) => {
+/*
+const editCategory2 = ( req, res, next ) => {
     const category = req.category[ 0 ];
     const product = req.body.payload;
 
@@ -144,12 +230,4 @@ function getNewSubCategories( subcategories, product ) {
 
     return subcategories;
 }
-
-const deleteCategory = ( req, res ) => {};
-
-module.exports = {
-    getCategories,
-    createCategory,
-    editCategory,
-    deleteCategory,
-};
+*/

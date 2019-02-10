@@ -1,0 +1,11 @@
+@import "../../styles/helpers.scss";
+
+.login-page {
+    border: solid 1px;
+
+    .login-form {
+        margin: 0px auto;
+        border: solid 1px;
+        width: 50%;
+    }
+}

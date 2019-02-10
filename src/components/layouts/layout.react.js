@@ -8,6 +8,7 @@ import { baseRoutes } from "../pages/routes";
 import Header from "../headers";
 import Footer from "../footers/footer.react";
 import BackToTopArrow from "../backToTopArrow/backToTopArrow.react";
+import Modal from "../modals/modal.react";
 
 import "./normalize.scss";
 import "./layout.scss";
@@ -59,12 +60,14 @@ class Layout extends Component {
         //     </p> );
         // }
 
-        const routeElements = baseRoutes.map( ( route, index ) =>
+        const routeElements = baseRoutes.map( ( route, index ) => (
             // console.log( "route", route );
-            <Route key={ index } { ...route } /> );
+            <Route key={ index } { ...route } />
+        ) );
 
         return (
             <div className="app-root">
+                <Modal />
                 <Header scrolledPastTop={ this.state.scrolledPastTop } />
                 <div className="main-content">
                     <Switch>{routeElements}</Switch>
@@ -79,8 +82,6 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ( {
-    height: state.application.height,
-    width: state.application.width,
     sitemap: state.sitemap,
 } );
 

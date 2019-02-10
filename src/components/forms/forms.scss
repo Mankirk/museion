@@ -1,0 +1,41 @@
+@import "../../styles/helpers.scss";
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    .login-header {
+        text-align: center;
+        font-size: 20px;
+    }
+}
+.product-common-fields {
+}
+
+.cms-product-form {
+    padding: 20px;
+}
+
+.main-forms {
+    display: flex;
+    justify-content: space-between;
+
+    .inputs {
+        width: 45%;
+    }
+}
+
+.image-form {
+    margin-bottom: 40px;
+}
+
+.input-normal {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.submit {
+    margin-top: 20px;
+    padding: 10px;
+    color: $white;
+    background-color: $secondary;
+}

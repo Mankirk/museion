@@ -1,0 +1,18 @@
+@import "../../styles/helpers.scss";
+
+.categories-form {
+    border: solid 1px;
+    padding: 20px;
+
+    .category {
+        border: solid 1px;
+
+        .subcategories {
+            padding: 10px 0px 10px 50px;
+
+            .sections {
+                padding: 10px 0px 10px 50px;
+            }
+        }
+    }
+}
