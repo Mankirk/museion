@@ -1,7 +1,8 @@
 import actions from "./actions";
 
-const { getSitemap } = actions;
+const { getSitemap, createCategory } = actions;
 
 export default {
     getSitemap,
+    createCategory,
 };

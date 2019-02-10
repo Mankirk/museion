@@ -21,7 +21,7 @@ function fetchWrapper( url, method, headers, body ) {
             {},
             {
                 Accept: "application/json",
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
             },
             headers
         ),

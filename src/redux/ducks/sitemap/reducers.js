@@ -5,6 +5,8 @@ const sitemapReducer = ( state = [], action ) => {
     switch ( action.type ) {
         case types.GET_SITEMAP_COMPLETED:
             return action.payload[ 0 ].categories;
+        case types.ADD_CATEGORY_COMPLETED:
+            return action.payload[ 0 ].categories;
         default:
             return state;
     }

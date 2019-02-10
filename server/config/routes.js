@@ -1,6 +1,9 @@
 const express = require( "express" );
+const multer = require( "multer" );
+const path = require( "path" );
 
 const controllers = require( "../controllers" );
+
 const repos = require( "../repositories" );
 const middlewares = require( "../middlewares" );
 const sitemap = require( "./sitemapTemplate" ).sitemap;
@@ -26,8 +29,37 @@ router.delete( "/deleteProduct", repos.product.deleteProduct );
 
 // category
 
+const storage = multer.diskStorage( {
+    destination: ( req, file, cb ) => {
+        cb( null, path.join( __dirname, "../../public/images/categories" ) );
+    },
+    filename( req, file, cb ) {
+        console.log( "req in multer storage", req.headers );
+        console.log( "body hint", req.body );
+        const multerHint = req.headers.multerhint ? req.headers.multerhint : Date.now();
+        cb( null, `${ multerHint }${ path.extname( file.originalname ) }` );
+    },
+} );
+
+const upload = multer( {
+    storage,
+    limits: { fileSize: 1000000 },
+} );
+
+router.post(
+    "/uploadImg",
+    ( req, res, next ) => next(),
+    upload.single( "myImage" ),
+    ( req, res, next ) => {
+        console.log( "img", req.file );
+        console.log( "body", req.body );
+
+        return res.success( { ms: "added IMG" } );
+    }
+);
 router.post(
     "/createCategory",
+    repos.image.saveCategoryImage,
     repos.category.getCategory,
     repos.category.createCategory,
     repos.category.getAll,

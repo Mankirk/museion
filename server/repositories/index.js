@@ -4,4 +4,5 @@ module.exports = {
     subcategory: require( "./subcategoryRepo" ),
     section: require( "./sectionRepo" ),
     sitemap: require( "./sitemapRepo" ),
+    image: require( "./imageRepo" ),
 };
