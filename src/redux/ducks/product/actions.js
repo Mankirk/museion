@@ -11,6 +11,18 @@ const fetchProducts = params => ( {
     },
 } );
 
+const createProduct = newProduct => ( {
+    type: types.CREATE_PRODUCT,
+    async: true,
+    generalFetching: true,
+    payload: {
+        path: "/createProduct",
+        method: "POST",
+        body: newProduct,
+    },
+} );
+
 export default {
     fetchProducts,
+    createProduct,
 };

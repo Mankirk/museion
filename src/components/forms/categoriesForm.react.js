@@ -21,7 +21,7 @@ class CategoriesForm extends Component {
             <div className="categories-form">
                 Edit Categories Form
                 <div className="categories">{categories}</div>
-                <button className="add-category" onClick={ () => openModal( "add-category" ) }>
+                <button className="add-category" onClick={ () => openModal( "add-category", {} ) }>
                     Add Category
                 </button>
             </div>

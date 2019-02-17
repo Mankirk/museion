@@ -1,6 +1,7 @@
 const express = require( "express" );
 const multer = require( "multer" );
 const path = require( "path" );
+const fs = require( "fs" );
 
 const controllers = require( "../controllers" );
 
@@ -31,13 +32,14 @@ router.delete( "/deleteProduct", repos.product.deleteProduct );
 
 const storage = multer.diskStorage( {
     destination: ( req, file, cb ) => {
-        cb( null, path.join( __dirname, "../../public/images/categories" ) );
+        const dest = req.headers.imagedestination ? req.headers.imagedestination : "";
+
+        cb( null, path.join( __dirname, `../../public/images/${ dest }` ) );
     },
     filename( req, file, cb ) {
-        console.log( "req in multer storage", req.headers );
-        console.log( "body hint", req.body );
-        const multerHint = req.headers.multerhint ? req.headers.multerhint : Date.now();
-        cb( null, `${ multerHint }${ path.extname( file.originalname ) }` );
+        console.log( "multer file", file );
+        const multerHint = req.headers.multerhint ? req.headers.multerhint : file.originalname;
+        cb( null, `${ multerHint }.${ file.mimetype.split( "/" )[ 1 ] }` );
     },
 } );
 
@@ -46,20 +48,39 @@ const upload = multer( {
     limits: { fileSize: 1000000 },
 } );
 
-router.post(
-    "/uploadImg",
-    ( req, res, next ) => next(),
-    upload.single( "myImage" ),
-    ( req, res, next ) => {
-        console.log( "img", req.file );
-        console.log( "body", req.body );
+router.post( "/uploadImg", upload.single( "myImage" ), ( req, res, next ) => {
+    console.log( "img", req.file );
+    console.log( "body", req.body );
 
-        return res.success( { ms: "added IMG" } );
+    return res.success( { ms: "added IMG" } );
+} );
+
+router.post(
+    "/uploadImages",
+    ( req, res, next ) => {
+        console.log( "req", req.files );
+        return next();
+    },
+    upload.array( "myImage", 10 ),
+    ( req, res, next ) => {
+        console.log( "img", req.files );
+        return res.success( { images: req.files.map( file => file.filename ) } );
     }
 );
+
+router.delete( "/removeImage", ( req, res ) => {
+    const imagePath = req.body.path;
+    fs.unlink( path.join( __dirname, `../../public/${ imagePath }` ), () =>
+        res.success( { mss: "file deleted" } ) );
+} );
+
 router.post(
     "/createCategory",
-    repos.image.saveCategoryImage,
+    ( req, res, next ) => {
+        console.log( "body", req.body );
+
+        return next();
+    },
     repos.category.getCategory,
     repos.category.createCategory,
     repos.category.getAll,
@@ -70,6 +91,8 @@ router.post(
 router.post(
     "/editCategory",
     repos.category.editCategory,
+    repos.section.editByCategory,
+    repos.subcategory.editByCategory,
     repos.category.getAll,
     repos.subcategory.getAll,
     repos.section.getAll,
@@ -100,6 +123,7 @@ router.post(
 router.post(
     "/editSubcategory",
     repos.subcategory.editSubcategory,
+    repos.section.editBySubcategory,
     repos.category.getAll,
     repos.subcategory.getAll,
     repos.section.getAll,

@@ -1,8 +1,8 @@
 import types from "./types";
 
-const openModal = modalType => ( {
+const openModal = ( modalType, prefilledData ) => ( {
     type: types.OPEN_MODAL,
-    payload: modalType,
+    payload: { modalType, prefilledData },
 } );
 
 const closeModal = () => ( {

@@ -7,7 +7,7 @@ const subcategorySchema = new Schema( {
     title: { type: String, required: true },
     key: { type: String, required: true },
     url: { type: String, required: true },
-    image: { type: String, required: false },
+    image: { type: String, required: true },
     parentKey: { type: String, required: true },
     parentTitle: { type: String, required: true },
 } );

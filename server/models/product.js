@@ -3,23 +3,33 @@ const uid = require( "uid" );
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema( {
-    id: { type: String, required: true },
+const schemaByLanguage = new Schema( {
     name: { type: String, required: true },
-    subTitle: { type: String, required: true },
-    type: { type: String, required: true },
-    sku: { type: Number, required: true },
+    subtitle: { type: String },
+    type: { type: String },
     description: { type: String, required: true },
-    category: { type: String, required: true },
-    subcategory: { type: String, required: false },
-    section: { type: String, required: false },
-    slug: { type: String },
-    images: {
-        main: {
-            url: { type: String },
+} );
+
+const categorySchema = new Schema( {
+    title: { type: String },
+    key: { type: String },
+} );
+
+const productSchema = new Schema( {
+    ro: { type: schemaByLanguage, required: true },
+    en: { type: schemaByLanguage, required: true },
+    key: { type: String, required: true },
+    sku: { type: String, required: true },
+    category: { type: categorySchema, required: true },
+    subcategory: { type: categorySchema, required: false },
+    section: { type: categorySchema, required: false },
+    slug: { type: String, required: false },
+    images: [
+        {
+            type: String,
         },
-        additional: [ { url: { type: String } } ],
-    },
+    ],
+    mainImage: { type: String },
 } );
 
 productSchema.methods.setId = function() {

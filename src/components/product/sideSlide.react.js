@@ -11,7 +11,9 @@ const SideSlide = ( { images, screenWidth } ) => {
 };
 
 function buildImages( images ) {
-    return images.map( image => <img src="/images/placeholder2.jpeg" alt={ image } key={ image.url } /> );
+    return images.map( image => (
+        <img src={ `/images/products/${ image }` } alt={ image } key={ image.url } />
+    ) );
 }
 
 const mapStateToProps = state => ( {

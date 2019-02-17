@@ -49,7 +49,10 @@ function buildCategories( categories, fetchProducts ) {
 
         return (
             <li className="category" key={ `${ category.title }${ i }` }>
-                <Link to={ `/${ category.url }` } onClick={ fetchProducts( { category: category.title } ) }>
+                <Link
+                    to={ `/${ category.url }` }
+                    onClick={ () => fetchProducts( { category: category.title } ) }
+                >
                     <span className="title">{category.title}</span>
                 </Link>
                 <div className={ `menu-dropdown ${ noCategoryClass }` }>
@@ -67,7 +70,9 @@ function buildSubcategories( category, fetchProducts ) {
             <div className="subcategory" key={ `${ sub.title }${ i }` }>
                 <Link
                     to={ `/${ sub.url }` }
-                    onClick={ fetchProducts( { category: category.title, subcategory: sub.title } ) }
+                    onClick={ () =>
+                        fetchProducts( { category: category.title, subcategory: sub.title } )
+                    }
                 >
                     <span className="sub-title">{sub.title}</span>
                 </Link>
@@ -82,11 +87,13 @@ function buildSections( subcategory, fetchProducts, category ) {
         <li className="section" key={ `${ section.title }${ index }` }>
             <Link
                 to={ `/${ section.url }` }
-                onClick={ fetchProducts( {
-                    category: category.title,
-                    subcategory: subcategory.title,
-                    section: section.title,
-                } ) }
+                onClick={ () =>
+                    fetchProducts( {
+                        category: category.title,
+                        subcategory: subcategory.title,
+                        section: section.title,
+                    } )
+                }
             >
                 {section.title}
             </Link>

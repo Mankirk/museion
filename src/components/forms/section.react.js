@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
+import { modalOperations } from "../../redux/ducks/modals";
 
 class Section extends Component {
     constructor( props ) {
@@ -10,17 +11,28 @@ class Section extends Component {
     }
 
     render() {
-        const { section } = this.props;
+        const { section, openModal } = this.props;
         return (
             <div className="section">
                 <div>
                     <span className="category-name">{section.title}</span>
-                    <button className="edit">edit</button>
-                    <button className="remove">remove</button>
+                    <button className="edit" onClick={ () => openModal( "edit-section", section ) }>
+                        edit
+                    </button>
+                    <button className="remove" onClick={ () => openModal( "remove-section", section ) }>
+                        remove
+                    </button>
                 </div>
             </div>
         );
     }
 }
 
-export default Section;
+const mapDispatchToProps = {
+    openModal: modalOperations.openModal,
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)( Section );

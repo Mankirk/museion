@@ -1,0 +1,9 @@
+@import "../../../styles/helpers.scss";
+
+.image-holder {
+    border: solid 1px $grey;
+
+    img {
+        max-width: 50%;
+    }
+}

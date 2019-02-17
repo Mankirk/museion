@@ -41,6 +41,7 @@ const getAll = ( req, res, next ) => {
 
 const getCategory = ( req, res, next ) => {
     const category = req.body.category;
+    console.log( "recieved", category );
 
     const queryParams = {};
     queryParams.key = category.key;
@@ -66,6 +67,7 @@ const createCategory = ( req, res, next ) => {
         newCategory.title = categoryToCreate.title;
         newCategory.url = `products/${ categoryToCreate.title }`;
         newCategory.key = categoryToCreate.key;
+        newCategory.image = categoryToCreate.image;
 
         newCategory.save( ( err, savedCategory ) => {
             if ( err ) {

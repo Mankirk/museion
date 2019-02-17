@@ -8,7 +8,7 @@ const getSitemap = ( req, res ) => {
             console.log( "err", err );
             return res.serverError();
         }
-        return res.success( docs );
+        return res.success( docs[ 0 ] );
     } );
 };
 
@@ -40,9 +40,9 @@ function buildSitemap( categoriesDoc, subcategoriesDoc, sectionsDoc ) {
     const categories = categoriesDoc.map( item => item._doc );
     const subcategories = subcategoriesDoc.map( item => item._doc );
     const sections = sectionsDoc.map( item => item._doc );
-    console.log( "categories", categories );
-    console.log( "subfcategories", subcategories );
-    console.log( "sections", sections );
+    // console.log( "categories", categories );
+    // console.log( "subfcategories", subcategories );
+    // console.log( "sections", sections );
     const newSitemap = categories.map( category => {
         const gatheredSubs = subcategories
             .filter( sub => sub.parentKey === category.key )

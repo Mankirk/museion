@@ -1,14 +1,82 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { modalOperations } from "../../redux/ducks/modals";
-import { CategoryForm } from "../forms/modalForms";
+import { CategoryForm, RemoveCategory } from "../forms/modalForms";
 
 import "./modals.scss";
 
 function chooseForm( type ) {
     switch ( type ) {
         case "add-category":
-            return <CategoryForm />;
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Create Category</h3>
+                    <CategoryForm />
+                </Fragment>
+            );
+
+        case "edit-category":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Edit Category</h3>
+                    <CategoryForm />
+                </Fragment>
+            );
+        case "remove-category":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Remove Category</h3>
+                    <RemoveCategory />
+                </Fragment>
+            );
+
+        case "add-subcategory":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Add Subcategory</h3>
+                    <CategoryForm />
+                </Fragment>
+            );
+
+        case "edit-subcategory":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Edit Subcategory</h3>
+                    <CategoryForm />
+                </Fragment>
+            );
+
+        case "remove-subcategory":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Remove Category</h3>
+                    <RemoveCategory />
+                </Fragment>
+            );
+
+        case "add-section":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Add Section</h3>
+                    <CategoryForm />
+                </Fragment>
+            );
+
+        case "edit-section":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Edit Section</h3>
+                    <CategoryForm />
+                </Fragment>
+            );
+
+        case "remove-section":
+            return (
+                <Fragment>
+                    <h3 className="modal-header">Remove Section</h3>
+                    <RemoveCategory />
+                </Fragment>
+            );
 
         default:
             return <p>No Form Matches</p>;

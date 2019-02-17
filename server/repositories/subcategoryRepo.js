@@ -45,6 +45,7 @@ const createSubcategory = ( req, res, next ) => {
         newSubcategory.key = subcategoryToCreate.key;
         newSubcategory.parentKey = subcategoryToCreate.parentKey;
         newSubcategory.parentTitle = subcategoryToCreate.parentTitle;
+        newSubcategory.image = subcategoryToCreate.image;
 
         newSubcategory.save( ( err, savedSubcategory ) => {
             if ( err ) {
@@ -53,6 +54,8 @@ const createSubcategory = ( req, res, next ) => {
             }
 
             req.subcategory = savedSubcategory;
+            console.log( "SUV", savedSubcategory );
+
             return next();
         } );
     } else {
@@ -95,6 +98,32 @@ const deleteSubcategory = ( req, res, next ) => {
     } );
 };
 
+const editByCategory = ( req, res, next ) => {
+    const editedCategory = req.body.category;
+
+    const queryParams = {};
+    queryParams.parentKey = editedCategory.key;
+
+    Subcategory.find( queryParams, ( err, docs ) => {
+        if ( err ) {
+            console.log( "err", err );
+            return res.serverError();
+        }
+
+        docs.forEach( doc => {
+            const docUrl = doc.url.split( "/" );
+            docUrl[ 1 ] = editedCategory.title;
+            const newUrl = docUrl.join( "/" );
+
+            doc.parentTitle = editedCategory.title;
+            doc.url = newUrl;
+            doc.save();
+        } );
+
+        return next();
+    } );
+};
+
 const deleteByCategory = ( req, res, next ) => {
     const deletedCategory = req.body.category;
 
@@ -117,4 +146,5 @@ module.exports = {
     editSubcategory,
     deleteSubcategory,
     deleteByCategory,
+    editByCategory,
 };

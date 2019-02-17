@@ -13,6 +13,17 @@
 
 .cms-product-form {
     padding: 20px;
+
+    .images {
+        display: flex;
+    }
+
+    .image-holder {
+        width: 20%;
+        img {
+            padding: 10px;
+        }
+    }
 }
 
 .main-forms {

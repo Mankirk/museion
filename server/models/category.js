@@ -7,7 +7,7 @@ const categorySchema = new Schema( {
     title: { type: String, required: true },
     key: { type: String, required: true },
     url: { type: String, required: true },
-    image: { type: String, required: false },
+    image: { type: String, required: true },
 } );
 
 categorySchema.methods.setKey = function() {

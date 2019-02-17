@@ -35,6 +35,8 @@ const createSection = ( req, res, next ) => {
     const sectionToCreate = req.body.section;
     const foundSection = req.section;
 
+    console.log( "section", sectionToCreate );
+
     if ( foundSection.length === 0 ) {
         const newSection = new Section();
         // newSection.setKey();
@@ -98,6 +100,58 @@ const deleteSection = ( req, res, next ) => {
     } );
 };
 
+const editByCategory = ( req, res, next ) => {
+    const editedCategory = req.body.category;
+
+    const queryParams = {};
+    queryParams.gParentKey = editedCategory.key;
+
+    Section.find( queryParams, ( err, docs ) => {
+        if ( err ) {
+            console.log( "err", err );
+            return res.serverError();
+        }
+
+        docs.forEach( doc => {
+            const docUrl = doc.url.split( "/" );
+            docUrl[ 1 ] = editedCategory.title;
+            const newUrl = docUrl.join( "/" );
+
+            doc.gParentTitle = editedCategory.title;
+            doc.url = newUrl;
+            doc.save();
+        } );
+
+        return next();
+    } );
+};
+
+const editBySubcategory = ( req, res, next ) => {
+    const editedSubcategory = req.body.subcategory;
+
+    const queryParams = {};
+    queryParams.parentKey = editedSubcategory.key;
+
+    Section.find( queryParams, ( err, docs ) => {
+        if ( err ) {
+            console.log( "err", err );
+            return res.serverError();
+        }
+
+        docs.forEach( doc => {
+            const docUrl = doc.url.split( "/" );
+            docUrl[ 2 ] = editedSubcategory.title;
+            const newUrl = docUrl.join( "/" );
+
+            doc.parentTitle = editedSubcategory.title;
+            doc.url = newUrl;
+            doc.save();
+        } );
+
+        return next();
+    } );
+};
+
 const deleteByCategory = ( req, res, next ) => {
     const deletedCategory = req.body.category;
 
@@ -136,4 +190,6 @@ module.exports = {
     deleteSection,
     deleteByCategory,
     deleteBySubcategory,
+    editByCategory,
+    editBySubcategory,
 };

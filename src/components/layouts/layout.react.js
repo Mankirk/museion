@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import { productOperations } from "../../redux/ducks/product";
 import { applicationOperations } from "../../redux/ducks/application";
 import { sitemapOperations } from "../../redux/ducks/sitemap";
 import { baseRoutes } from "../pages/routes";
@@ -24,8 +25,9 @@ class Layout extends Component {
         this.saveWindowSize = this.saveWindowSize.bind( this );
     }
     componentDidMount() {
-        const { getSitemap } = this.props;
+        const { getSitemap, fetchProducts } = this.props;
         getSitemap();
+        fetchProducts();
         this.saveWindowSize();
         window.addEventListener( "resize", this.saveWindowSize );
         window.addEventListener( "scroll", this.onScroll );
@@ -89,6 +91,7 @@ const mapDispatchToProps = {
     setWindowHeight: applicationOperations.setWindowHeight,
     setWindowWidth: applicationOperations.setWindowWidth,
     getSitemap: sitemapOperations.getSitemap,
+    fetchProducts: productOperations.fetchProducts,
 };
 
 export default connect(

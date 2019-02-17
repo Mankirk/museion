@@ -13,24 +13,15 @@ const getProducts = ( req, res ) => {
             console.log( "err", err );
             return res.serverError();
         }
+
+        console.log( "FOUND DOCS", docs );
         return res.success( docs );
     } );
 };
 
-// const getProducts = ( req, res ) => {
-//     Product.find( req.headers, ( err, docs ) => {
-//         if ( err ) {
-//             console.log( "err", err );
-//             return res.serverError();
-//         }
-//         return res.success( docs );
-//     } );
-// };
-
 const createProduct = ( req, res ) => {
-    const product = new Product( req.body.payload );
-    product.setId();
-    product.setSlug();
+    const product = new Product( req.body );
+    console.log( "body", req.body );
     product.save( ( err, savedProduct ) => {
         if ( err ) {
             console.log( "err", err );
@@ -43,7 +34,7 @@ const createProduct = ( req, res ) => {
 };
 
 const editProduct = ( req, res ) => {
-    const editedProduct = req.body.payload;
+    const editedProduct = req.body;
 
     const queryParams = {};
     queryParams.sku = editedProduct.sku;
@@ -59,7 +50,7 @@ const editProduct = ( req, res ) => {
 };
 
 const deleteProduct = ( req, res ) => {
-    const { sku } = req.body.payload;
+    const { sku } = req.body;
 
     const queryParams = {};
     queryParams.sku = sku;
