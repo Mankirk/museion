@@ -12,7 +12,7 @@ const ProductShowcase = ( { product } ) => {
             <p className="title">{product.name}</p>
 
             <div className="main-image">
-                <img src="/images/placeholder1.jpeg" alt="" />
+                <img src={ `${ window.location.origin }/images/product/${ product.images[ 0 ] }` } alt="" />
             </div>
             <div className="sidebar">
                 <div className="image-wrapper">

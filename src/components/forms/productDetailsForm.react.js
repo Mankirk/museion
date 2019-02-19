@@ -23,9 +23,9 @@ class ProductDetailsForm extends Component {
                 description: "",
             },
             sku: "",
-            category: { title: "", key: "" },
-            subcategory: { title: "", key: "" },
-            section: { title: "", key: "" },
+            category: "",
+            subcategory: "",
+            section: "",
             files: [],
         };
 
@@ -38,7 +38,7 @@ class ProductDetailsForm extends Component {
     }
 
     handleSubmit() {
-        const { createProduct } = this.props;
+        const { sitemap, createProduct } = this.props;
 
         const productBody = this.state;
 
@@ -48,11 +48,18 @@ class ProductDetailsForm extends Component {
 
         productBody.images = images;
 
-        const subcategoryPath = this.state.subcategory ? `/${ this.state.subcategory.title }` : "";
-        const sectionPath = this.state.section ? `/${ this.state.section.title }` : "";
-        productBody.slug = `product/${ this.state.category.title }${ subcategoryPath }${ sectionPath }`;
+        const titles = getTitles(
+            sitemap,
+            this.state.category,
+            this.state.subcategory,
+            this.state.section
+        );
 
-        console.log( "body", productBody );
+        const subcategoryPath = titles.subcategory ? `/${ titles.subcategory }` : "";
+        const sectionPath = titles.section ? `/${ titles.section }` : "";
+        productBody.slug = `product/${
+            titles.category
+        }${ subcategoryPath }${ sectionPath }/${ productKey }`;
 
         if ( Array.from( this.state.files ).length !== 0 ) {
             createProduct( productBody );
@@ -117,16 +124,14 @@ class ProductDetailsForm extends Component {
             title: category.title,
         } ) );
         const categoryOptions = categories.map( category => (
-            <option value={ { key: category.key, title: category.title } }>{category.title}</option>
+            <option value={ `${ category.key }` }>{category.title}</option>
         ) );
 
         const selectedCategory =
-            this.state.category.key !== ""
-                ? sitemap.find( cat => cat.key === this.state.category.key )
-                : "";
+            this.state.category !== "" ? sitemap.find( cat => cat.key === this.state.category ) : "";
         const selectedSubcat =
-            this.state.subcategory.key !== ""
-                ? selectedCategory.subcategories.find( sub => sub.key === this.state.subcategory.key )
+            this.state.subcategory !== ""
+                ? selectedCategory.subcategories.find( sub => sub.key === this.state.subcategory )
                 : "";
 
         return (
@@ -212,22 +217,31 @@ class ProductDetailsForm extends Component {
                     />
                     <p>Category</p>
                     <select name="category" onChange={ this.handleCommonInput }>
+                        <option selected disabled style={ { display: "none" } }>
+                            Select Category
+                        </option>
                         {categoryOptions}
                     </select>
 
-                    {this.state.category.key !== "" && (
+                    {this.state.category !== "" && (
                         <Fragment>
                             <p>Subcategory</p>
                             <select name="subcategory" onChange={ this.handleCommonInput }>
+                                <option selected disabled style={ { display: "none" } }>
+                                    Select Subcategory
+                                </option>
                                 {getSubcategories( selectedCategory )}
                             </select>
                         </Fragment>
                     )}
 
-                    {this.state.subcategory.key !== "" && (
+                    {this.state.subcategory !== "" && (
                         <Fragment>
                             <p>Section</p>
                             <select name="section" onChange={ this.handleCommonInput }>
+                                <option selected disabled style={ { display: "none" } }>
+                                    Select Subcategory
+                                </option>
                                 {getSections( selectedSubcat )}
                             </select>
                         </Fragment>
@@ -241,9 +255,24 @@ class ProductDetailsForm extends Component {
     }
 }
 
+function getTitles( sitemap, catKey, subKey, sectionKey ) {
+    const category = sitemap.find( cat => cat.key === catKey );
+    const sub = subKey ? category.subcategories.find( sub1 => sub1.key === subKey ) : null;
+    const section = sectionKey ? sub.sections.find( section1 => section1.key === sectionKey ) : null;
+
+    return {
+        category: category.title,
+        subcategory: sub ? sub.title : null,
+        section: section ? section.title : null,
+    };
+}
+
 function getSubcategories( category ) {
+    if ( !category ) {
+        return "";
+    }
     const subcategories = category.subcategories.map( sub => (
-        <option value={ { key: sub.key, title: sub.title } } key={ sub.key }>
+        <option value={ `${ sub.key }` } key={ sub.key }>
             {sub.title}
         </option>
     ) );
@@ -252,8 +281,11 @@ function getSubcategories( category ) {
 }
 
 function getSections( sub ) {
+    if ( !sub ) {
+        return "";
+    }
     const sections = sub.sections.map( section => (
-        <option value={ { key: section.key, title: section.title } } key={ section.key }>
+        <option value={ `${ section.key }` } key={ section.key }>
             {section.title}
         </option>
     ) );

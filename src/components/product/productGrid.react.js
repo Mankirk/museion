@@ -31,7 +31,7 @@ function buildProducts( products, screenWidth ) {
         const isLeftElement = findLeftElement( index, screenWidth );
         return (
             <div className="product-box-wrap" key={ product.sku + index }>
-                <Link to={ product.slug }>
+                <Link to={ `products/${ product.slug }` }>
                     <ProductBox product={ product } isLeftElement={ isLeftElement } />
                 </Link>
             </div>

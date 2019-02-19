@@ -12,7 +12,7 @@ const baseRoutes = [
     route( "/", HomePage, exact ),
     route( "/products", ProductListPage ),
     route( "/404", NotFoundPage, exact ),
-    route( "/product", ProductDetailsPage ),
+    route( "/product/*", ProductDetailsPage ),
     route( "/login", LoginPage ),
     route( "/cms", CmsMainPage, exact ),
     route( "/cmsProduct", CmsProductPage, exact ),
